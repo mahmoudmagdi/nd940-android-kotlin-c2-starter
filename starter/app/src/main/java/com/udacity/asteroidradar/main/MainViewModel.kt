@@ -1,6 +1,13 @@
 package com.udacity.asteroidradar.main
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.udacity.asteroidradar.database.AsteroidDataBaseDao
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    val database: AsteroidDataBaseDao,
+    application: Application
+) : AndroidViewModel(application) {
+
+
 }
