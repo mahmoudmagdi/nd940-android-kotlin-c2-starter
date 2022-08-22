@@ -1,22 +1,31 @@
 package com.udacity.asteroidradar.api
 
+import com.google.gson.Gson
 import com.udacity.asteroidradar.database.Asteroid
 import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.PictureOfDay
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+
+fun parsePictureOfDayJsonResult(jsonResult: JSONObject): PictureOfDay {
+    val url = jsonResult.getString("url")
+    val mediaType = jsonResult.getString("media_type")
+    val title = jsonResult.getString("title")
+
+    return PictureOfDay(mediaType, title, url)
+}
+
 fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
+    val gson = Gson()
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
-
     val asteroidList = ArrayList<Asteroid>()
-
     val nextSevenDaysFormattedDates = getNextSevenDaysFormattedDates()
     for (formattedDate in nextSevenDaysFormattedDates) {
         if (nearEarthObjectsJson.has(formattedDate)) {
             val dateAsteroidJsonArray = nearEarthObjectsJson.getJSONArray(formattedDate)
-
             for (i in 0 until dateAsteroidJsonArray.length()) {
                 val asteroidJson = dateAsteroidJsonArray.getJSONObject(i)
                 val id = asteroidJson.getLong("id")

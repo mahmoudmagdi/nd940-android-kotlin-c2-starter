@@ -1,0 +1,13 @@
+Download and parse the data from NASA NeoWS (Near Earth Object Web Service) API. As this response cannot be parsed directly with Moshi, we are providing a method to parse the data “manually” for you, it’s called parseAsteroidsJsonResult inside NetworkUtils class, we recommend trying for yourself before using this method or at least take a close look at it as it is an extremely common problem in real-world apps. For this response we need retrofit-converter-scalars instead of Moshi, you can check this dependency in build.gradle (app) file.
+
+Be able to cache the data of the asteroid by using a worker, so it downloads and saves today's asteroids in background once a day when the device is charging and wifi is enabled.
+
+Add content description to the views: Picture of the day (Use the title dynamically for this), details images and dialog button. Check if it works correctly with talk back.
+
+Make sure the entire app works without an internet connection.
+
+Modify the app to support multiple languages, device sizes, and orientations.
+
+Make the app delete asteroids from the previous day once a day using the same workManager that downloads the asteroids.
+
+Match the styles for the details screen subtitles and values to make it consistent, and make it look like what is in the designs.

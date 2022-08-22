@@ -72,11 +72,28 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
-    // new room version added //
+    /** new room version added */
     implementation("androidx.room:room-ktx:2.5.0-alpha02")
     implementation "androidx.room:room-runtime:2.5.0-alpha02"
     kapt "androidx.room:room-compiler:2.5.0-alpha02"
-    // new room version added //
+    /** new room version added */
+
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
+
+    // Retrofit Coroutines Support
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
+
+    implementation "com.github.bumptech.glide:glide:$version_glide"
 
     implementation "android.arch.work:work-runtime-ktx:1.0.1"
 

@@ -6,30 +6,45 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "asteroid_table")
+@Entity(tableName = "asteroids_table")
 @Parcelize
-data class Asteroid(
+data class Asteroid constructor(
     @PrimaryKey(autoGenerate = true)
     val id: Long,
 
     @ColumnInfo(name = "codename")
-    val codename: String,
+    val codename: String?,
 
     @ColumnInfo(name = "closeApproachDate")
-    val closeApproachDate: String,
+    val closeApproachDate: String?,
 
     @ColumnInfo(name = "absoluteMagnitude")
-    val absoluteMagnitude: Double,
+    val absoluteMagnitude: Double?,
 
     @ColumnInfo(name = "estimatedDiameter")
-    val estimatedDiameter: Double,
+    val estimatedDiameter: Double?,
 
     @ColumnInfo(name = "relativeVelocity")
-    val relativeVelocity: Double,
+    val relativeVelocity: Double?,
 
     @ColumnInfo(name = "distanceFromEarth")
-    val distanceFromEarth: Double,
+    val distanceFromEarth: Double?,
 
     @ColumnInfo(name = "isPotentiallyHazardous")
-    val isPotentiallyHazardous: Boolean
+    val isPotentiallyHazardous: Boolean?
 ) : Parcelable
+
+fun List<Asteroid>.asDatabaseModel(): Array<Asteroid> {
+    return map {
+        Asteroid(
+            id = it.id,
+            codename = it.codename,
+            closeApproachDate = it.closeApproachDate,
+            absoluteMagnitude = it.absoluteMagnitude,
+            estimatedDiameter = it.estimatedDiameter,
+            relativeVelocity = it.relativeVelocity,
+            distanceFromEarth = it.distanceFromEarth,
+            isPotentiallyHazardous = it.isPotentiallyHazardous
+        )
+    }.toTypedArray()
+}

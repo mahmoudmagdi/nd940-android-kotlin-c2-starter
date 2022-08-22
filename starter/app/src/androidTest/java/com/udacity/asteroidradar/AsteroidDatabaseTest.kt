@@ -6,6 +6,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.udacity.asteroidradar.database.Asteroid
 import com.udacity.asteroidradar.database.AsteroidDataBase
 import com.udacity.asteroidradar.database.AsteroidDataBaseDao
+import com.udacity.asteroidradar.database.ToDoItemDataBaseDao
 import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
@@ -16,7 +17,7 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class AsteroidDatabaseTest {
 
-    private lateinit var asteroidDao: AsteroidDataBaseDao
+    private lateinit var asteroidDao: ToDoItemDataBaseDao
     private lateinit var db: AsteroidDataBase
 
     @Before
