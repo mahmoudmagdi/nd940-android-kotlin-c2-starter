@@ -2,6 +2,7 @@ package com.udacity.asteroidradar.database
 
 import android.content.Context
 import androidx.room.*
+import com.udacity.asteroidradar.model.Asteroid
 
 @Database(entities = [Asteroid::class], version = 1, exportSchema = false)
 abstract class AsteroidDataBase : RoomDatabase() {

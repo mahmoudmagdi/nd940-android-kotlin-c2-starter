@@ -5,11 +5,11 @@
 
         <variable
             name="clickListener"
-            type="com.udacity.asteroidradar.main.AsteroidClickListener" />
+            type="com.udacity.asteroidradar.ui.adapters.AsteroidClickListener" />
 
         <variable
             name="asteroid"
-            type="com.udacity.asteroidradar.database.Asteroid" />
+            type="com.udacity.asteroidradar.model.Asteroid" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,31 +23,30 @@
 
         <TextView
             android:id="@+id/codeName"
+            style="@style/TextAppearance.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:contentDescription="@string/asteroid_code_name"
+            android:gravity="start"
             android:text="@{asteroid.codename}"
-            android:textAlignment="textStart"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/closeApproachDate"
+            style="@style/TextAppearance.Subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:contentDescription="@string/asteroid_close_approach_date"
             android:text="@{asteroid.closeApproachDate}"
-            android:textAlignment="textStart"
-            android:textColor="@color/gray"
-            android:textSize="18sp"
-            android:textStyle="normal"
+            android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/codeName" />
@@ -56,6 +55,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="15dp"
+            android:contentDescription="@string/ispotentiallyhazardous"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

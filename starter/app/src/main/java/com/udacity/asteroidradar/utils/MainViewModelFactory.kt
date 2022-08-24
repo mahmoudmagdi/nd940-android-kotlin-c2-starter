@@ -1,12 +1,13 @@
-package com.udacity.asteroidradar.main
+package com.udacity.asteroidradar.utils
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.udacity.asteroidradar.database.AsteroidDataBaseDao
+import com.udacity.asteroidradar.database.AsteroidDataBase
+import com.udacity.asteroidradar.viewmodel.MainViewModel
 
 class MainViewModelFactory(
-    private val dataSource: AsteroidDataBaseDao,
+    private val dataSource: AsteroidDataBase,
     private val application: Application
 ) : ViewModelProvider.Factory {
 

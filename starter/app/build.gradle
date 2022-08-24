@@ -97,6 +97,9 @@ dependencies {
 
     implementation "android.arch.work:work-runtime-ktx:1.0.1"
 
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation project(path: ':app') // for unit testing
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

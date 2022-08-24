@@ -1,28 +1,16 @@
-package com.udacity.asteroidradar.api
+package com.udacity.asteroidradar.utils
 
-import com.google.gson.Gson
-import com.udacity.asteroidradar.database.Asteroid
-import com.udacity.asteroidradar.Constants
-import com.udacity.asteroidradar.PictureOfDay
+import android.util.Log
+import com.udacity.asteroidradar.model.Asteroid
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
-fun parsePictureOfDayJsonResult(jsonResult: JSONObject): PictureOfDay {
-    val url = jsonResult.getString("url")
-    val mediaType = jsonResult.getString("media_type")
-    val title = jsonResult.getString("title")
-
-    return PictureOfDay(mediaType, title, url)
-}
-
 fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
-    val gson = Gson()
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
     val asteroidList = ArrayList<Asteroid>()
-    val nextSevenDaysFormattedDates = getNextSevenDaysFormattedDates()
+    val nextSevenDaysFormattedDates = getNextDaysFormattedDates(7)
     for (formattedDate in nextSevenDaysFormattedDates) {
         if (nearEarthObjectsJson.has(formattedDate)) {
             val dateAsteroidJsonArray = nearEarthObjectsJson.getJSONArray(formattedDate)
@@ -55,16 +43,40 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
     return asteroidList
 }
 
-private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
-    val formattedDateList = ArrayList<String>()
+fun getDate(afterDays: Int? = 0): String {
+    val calender = Calendar.getInstance()
+    if (afterDays != 0) {
+        calender.add(Calendar.DAY_OF_YEAR, afterDays!!)
+    }
+    val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.ENGLISH)
+    return dateFormat.format(calender.time)
+}
+
+fun getNextDaysFormattedDates(daysCounts: Int? = Constants.DEFAULT_END_DATE_DAYS): java.util.ArrayList<String> {
+    val formattedDateList = java.util.ArrayList<String>()
 
     val calendar = Calendar.getInstance()
-    for (i in 0..Constants.DEFAULT_END_DATE_DAYS) {
+    for (i in 0..daysCounts!!) {
         val currentTime = calendar.time
-        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
+        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.ENGLISH)
         formattedDateList.add(dateFormat.format(currentTime))
         calendar.add(Calendar.DAY_OF_YEAR, 1)
     }
 
     return formattedDateList
+}
+
+fun List<Asteroid>.asDatabaseModel(): Array<Asteroid> {
+    return map {
+        Asteroid(
+            id = it.id,
+            codename = it.codename,
+            closeApproachDate = it.closeApproachDate,
+            absoluteMagnitude = it.absoluteMagnitude,
+            estimatedDiameter = it.estimatedDiameter,
+            relativeVelocity = it.relativeVelocity,
+            distanceFromEarth = it.distanceFromEarth,
+            isPotentiallyHazardous = it.isPotentiallyHazardous
+        )
+    }.toTypedArray()
 }
